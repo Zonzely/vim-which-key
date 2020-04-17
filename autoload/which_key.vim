@@ -19,6 +19,13 @@ function! which_key#register(prefix, dict) abort
   call extend(s:desc, {key:val})
 endfunction
 
+function! which_key#local_register(prefix, dict) abort
+  let key = a:prefix ==? '<Space>' ? ' ' : a:prefix
+  let val = a:dict
+  let s:desc[key] = val
+  let s:cache = {}
+endfunction
+
 " No need to open which-key window, execute the acction according to the current input.
 function! s:handle_char_on_start_is_ok(c) abort
   if which_key#char_handler#is_exit_code(a:c)
